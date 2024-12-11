@@ -74,9 +74,19 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreBookRequest $request, string $id)
     {
-        //
+        $validated = $request->validated();
+        DB::table('books')
+            ->where('id', $id)
+            ->update([
+                'title' => $validated['title'],
+                'author' => $validated['author'],
+                'published_year' => $validated['published_year'],
+                'price' => $validated['price'],
+                'updated_at' => now(),
+        ]);
+        return redirect()->route('books.show', $id)->with('success', 'Book updated Sucessfully');
     }
 
     /**
