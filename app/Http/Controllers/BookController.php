@@ -64,7 +64,11 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $book = DB::table('books')->where('id', $id)->first();
+        if (!$book){
+            abort(404);
+        }
+        return view('books.edit', ['book' => $book]);
     }
 
     /**
