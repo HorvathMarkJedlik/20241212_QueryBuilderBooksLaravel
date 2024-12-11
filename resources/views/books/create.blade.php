@@ -1,24 +1,37 @@
 <x-layout>
+    <h1>Create new book</h1>
     <form method="POST" action="{{route('books.store')}}">
         @csrf
         <div class="mb-3">
           <label class="form-check-label" for="title">Title</label>
-          <input type="text" class="form-control" id="title" name="title">
+          <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}">
+          @error('title')
+            <div class="invalid-feedback">{{$message}}</div>
+          @enderror
         </div>
 
         <div class="mb-3">
             <label class="form-check-label" for="author">Author</label>
-            <input type="text" class="form-control" id="author" name="title">
+            <input type="text" class="form-control @error('author') is-invalid @enderror" id="author" name="author" value="{{ old('author') }}">
+            @error('author')
+              <div class="invalid-feedback">{{$message}}</div>
+            @enderror
           </div>
 
           <div class="mb-3">
             <label class="form-check-label" for="published_year">Published Year</label>
-            <input type="text" class="form-control" id="publised_year" name="published_year">
+            <input type="number" class="form-control @error('published_year') is-invalid @enderror" id="published_year" name="published_year" value="{{ old('published_year') }}">
+            @error('published_year')
+              <div class="invalid-feedback">{{$message}}</div>
+            @enderror
           </div>
 
           <div class="mb-3">
             <label class="form-check-label" for="price">Price</label>
-            <input type="text" class="form-control" id="price" name="price">
+            <input type="number" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') }}">
+            @error('price')
+              <div class="invalid-feedback">{{$message}}</div>
+            @enderror
           </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
