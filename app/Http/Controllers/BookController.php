@@ -107,6 +107,6 @@ class BookController extends Controller
         $books = DB::table('books')
             ->where('title', 'like', '%' . $request->title . '%')
             ->get();
-        return view('books.index', ['book' => $books]);
+        return view('books.index', ['books' => $books]);
     }
 }
